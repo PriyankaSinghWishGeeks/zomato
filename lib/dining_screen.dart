@@ -13,6 +13,7 @@ import 'widgets/dining_popular_resturent.dart';
 import 'widgets/in_mood_for.dart';
 import 'widgets/limelight.dart';
 import 'widgets/next_fav_bar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DiningScreen extends StatelessWidget {
   const DiningScreen({super.key});
@@ -21,182 +22,247 @@ class DiningScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: CustomScrollView(
-        slivers: [
-          // 🔹 Top Purple Banner with Location + Search (pinned)
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: _SliverAppBarDelegate(
-              minHeight: 140,
-              maxHeight: 140,
-              child: Container(
-                color: const Color.fromARGB(255, 17, 3, 43), // dark purple
-                padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // 📍 Location Row
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+      body: Stack(
+        children: [
+          CustomScrollView(
+            slivers: [
+              // 🔹 Top Purple Banner with Location + Search (pinned)
+              SliverPersistentHeader(
+                pinned: true,
+                delegate: _SliverAppBarDelegate(
+                  minHeight: 140,
+                  maxHeight: 140,
+                  child: Container(
+                    color: const Color.fromARGB(255, 17, 3, 43), // dark purple
+                    padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Icon(
-                          Icons.location_on,
-                          color: Colors.white,
-                          size: 22,
-                        ),
-                        const SizedBox(width: 6),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Row(
-                                children: [
+                        // 📍 Location Row
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.location_on,
+                              color: Colors.white,
+                              size: 22,
+                            ),
+                            const SizedBox(width: 6),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: const [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Block R",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      SizedBox(width: 2),
+                                      Icon(
+                                        Icons.keyboard_arrow_down,
+                                        size: 18,
+                                        color: Colors.white,
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 2),
                                   Text(
-                                    "Block R",
+                                    "Mohan Garden, Razapur Khurd…",
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12.5,
                                       color: Colors.white,
                                     ),
                                   ),
-                                  SizedBox(width: 2),
-                                  Icon(
-                                    Icons.keyboard_arrow_down,
-                                    size: 18,
-                                    color: Colors.white,
-                                  ),
                                 ],
                               ),
-                              SizedBox(height: 2),
-                              Text(
-                                "Mohan Garden, Razapur Khurd…",
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
+                            ),
+                            const SizedBox(width: 8),
+                            CircleAvatar(
+                              radius: 18,
+                              backgroundColor: Colors.grey.shade200,
+                              child: const Icon(
+                                Icons.account_balance_wallet_outlined,
+                                size: 18,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            const CircleAvatar(
+                              radius: 18,
+                              backgroundColor: Colors.blue,
+                              child: Text(
+                                "P",
                                 style: TextStyle(
-                                  fontSize: 12.5,
                                   color: Colors.white,
+                                  fontWeight: FontWeight.bold,
                                 ),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        const SizedBox(height: 12),
+
+                        // 🔍 Search Bar inside purple
+                        Container(
+                          height: 52,
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(14),
+                            border: Border.all(color: Colors.grey.shade300),
+                            color: Colors.white,
+                          ),
+                          child: Row(
+                            children: [
+                              const Icon(Icons.search, color: Colors.red),
+                              const SizedBox(width: 8),
+                              const Expanded(
+                                child: Text(
+                                  'Search "noodles"',
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                              ),
+                              Container(
+                                height: 24,
+                                width: 1,
+                                color: Colors.grey.shade300,
+                              ),
+                              const SizedBox(width: 10),
+                              const Icon(Icons.mic, color: Colors.red),
+                              const SizedBox(width: 10),
+                              _iconToggle(
+                                icon: Icons.eco,
+                                activeColor: Colors.green,
+                                isActive: true,
+                              ),
+                              const SizedBox(width: 8),
+                              _iconToggle(
+                                icon: Icons.favorite,
+                                activeColor: Colors.green,
+                                isActive: false,
                               ),
                             ],
                           ),
                         ),
-                        const SizedBox(width: 8),
-                        CircleAvatar(
-                          radius: 18,
-                          backgroundColor: Colors.grey.shade200,
-                          child: const Icon(
-                            Icons.account_balance_wallet_outlined,
-                            size: 18,
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        const CircleAvatar(
-                          radius: 18,
-                          backgroundColor: Colors.blue,
-                          child: Text(
-                            "P",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
                       ],
                     ),
+                  ),
+                ),
+              ),
 
-                    const SizedBox(height: 12),
+              // 🟣 Banner below purple header (scrolls)
+              SliverToBoxAdapter(
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.4,
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                    color: Colors.deepPurple,
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/dinner_banner.png'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ),
 
-                    // 🔍 Search Bar inside purple
-                    Container(
-                      height: 52,
-                      padding: const EdgeInsets.symmetric(horizontal: 12),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14),
-                        border: Border.all(color: Colors.grey.shade300),
-                        color: Colors.white,
-                      ),
-                      child: Row(
-                        children: [
-                          const Icon(Icons.search, color: Colors.red),
-                          const SizedBox(width: 8),
-                          const Expanded(
-                            child: Text(
-                              'Search "noodles"',
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                          ),
-                          Container(
-                            height: 24,
-                            width: 1,
-                            color: Colors.grey.shade300,
-                          ),
-                          const SizedBox(width: 10),
-                          const Icon(Icons.mic, color: Colors.red),
-                          const SizedBox(width: 10),
-                          _iconToggle(
-                            icon: Icons.eco,
-                            activeColor: Colors.green,
-                            isActive: true,
-                          ),
-                          const SizedBox(width: 8),
-                          _iconToggle(
-                            icon: Icons.favorite,
-                            activeColor: Colors.green,
-                            isActive: false,
-                          ),
-                        ],
-                      ),
+              // 🔵 Curved Explore Menu Section (pinned)
+              SliverPersistentHeader(
+                pinned: true,
+                delegate: _SliverAppBarDelegate(
+                  minHeight: 140,
+                  maxHeight: 140,
+                  child: Container(
+                    color: Colors.white,
+                    child: ExploreMenuCurvedSection(),
+                  ),
+                ),
+              ),
+
+              const SliverToBoxAdapter(child: InTheMoodSection()),
+
+              const SliverToBoxAdapter(child: FavouriteBarSection()),
+              SliverToBoxAdapter(child: SizedBox(height: 20)),
+              const SliverToBoxAdapter(child: InTheLimeLight()),
+              SliverToBoxAdapter(child: SizedBox(height: 20)),
+              const SliverToBoxAdapter(child: DiningExploreCart()),
+              SliverToBoxAdapter(child: SizedBox(height: 20)),
+              const SliverToBoxAdapter(child: DiningFeatured.new()),
+              SliverToBoxAdapter(child: SizedBox(height: 20)),
+              const SliverToBoxAdapter(child: MustTriesSection()),
+              SliverToBoxAdapter(child: SizedBox(height: 20)),
+              const SliverToBoxAdapter(child: DiningPopularRestaurants()),
+
+              SliverToBoxAdapter(child: SizedBox(height: 20)),
+            ],
+          ),
+
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 10, // 👈 above bottom nav
+            child: Center(
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 18,
+                  vertical: 10,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(24),
+                  gradient: const LinearGradient(
+                    colors: [
+                      Color(0xFF6A5AE0), // bluish purple
+                      Color(0xFF4DA1FF), // blue
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.25),
+                      blurRadius: 12,
+                      offset: const Offset(0, 6),
                     ),
                   ],
                 ),
-              ),
-            ),
-          ),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(24),
+                  onTap: () async {
+                    final uri = Uri.parse(
+                      "https://www.google.com/maps/search/?api=1&query=restaurants",
+                    );
 
-          // 🟣 Banner below purple header (scrolls)
-          SliverToBoxAdapter(
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.4,
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                color: Colors.deepPurple,
-                image: DecorationImage(
-                  image: AssetImage('assets/images/dinner_banner.png'),
-                  fit: BoxFit.cover,
+                    await launchUrl(uri, mode: LaunchMode.externalApplication);
+                  },
+
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
+                      Icon(
+                        Icons.explore, // 🧭 compass-style icon like Zomato
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                      SizedBox(width: 8),
+                      Text(
+                        "Map",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 15,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
-
-          // 🔵 Curved Explore Menu Section (pinned)
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: _SliverAppBarDelegate(
-              minHeight: 140,
-              maxHeight: 140,
-              child: Container(
-                color: Colors.white,
-                child: ExploreMenuCurvedSection(),
-              ),
-            ),
-          ),
-
-          const SliverToBoxAdapter(child: InTheMoodSection()),
-
-          const SliverToBoxAdapter(child: FavouriteBarSection()),
-          SliverToBoxAdapter(child: SizedBox(height: 20)),
-          const SliverToBoxAdapter(child: InTheLimeLight()),
-          SliverToBoxAdapter(child: SizedBox(height: 20)),
-          const SliverToBoxAdapter(child: DiningExploreCart()),
-          SliverToBoxAdapter(child: SizedBox(height: 20)),
-          const SliverToBoxAdapter(child: DiningFeatured.new()),
-          SliverToBoxAdapter(child: SizedBox(height: 20)),
-          const SliverToBoxAdapter(child: MustTriesSection()),
-          SliverToBoxAdapter(child: SizedBox(height: 20)),
-          const SliverToBoxAdapter(child: DiningPopularRestaurants()),
-
-   SliverToBoxAdapter(child: SizedBox(height: 20)),
-
         ],
       ),
     );

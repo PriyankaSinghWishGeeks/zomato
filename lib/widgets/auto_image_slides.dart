@@ -1,3 +1,5 @@
+
+import 'package:flutter/material.dart';
 class AutoImageSlider extends StatefulWidget {
   const AutoImageSlider({super.key});
 

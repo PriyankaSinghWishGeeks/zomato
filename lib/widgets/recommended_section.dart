@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zomatoo/widgets/restaurant_menu_screen.dart';
 
 class RecommendedSection extends StatelessWidget {
   const RecommendedSection({super.key});
@@ -26,7 +27,6 @@ class RecommendedSection extends StatelessWidget {
 
           const SizedBox(height: 14),
 
-          // 🧱 2-ROW HORIZONTAL GRID
           SizedBox(
             height: 380,
             child: ListView.builder(
@@ -36,12 +36,23 @@ class RecommendedSection extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.only(right: 12),
-                  child: Column(
-                    children: const [
-                      _RestaurantCard(),
-                      SizedBox(height: 14),
-                      _RestaurantCard(),
-                    ],
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(16),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const RestaurantMenuScreen(),
+                        ),
+                      );
+                    },
+                    child: Column(
+                      children: const [
+                        _RestaurantCard(),
+                        SizedBox(height: 14),
+                        _RestaurantCard(),
+                      ],
+                    ),
                   ),
                 );
               },

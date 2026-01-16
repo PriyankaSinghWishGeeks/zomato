@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zomatoo/widgets/restaurant_menu_screen.dart';
 
 class FeaturedSection extends StatelessWidget {
   const FeaturedSection({super.key});
@@ -37,13 +38,28 @@ class FeaturedSection extends StatelessWidget {
 
           const SizedBox(height: 12),
 
-          // LIST
           ListView.builder(
             itemCount: 20,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            itemBuilder: (context, index) => const _FeaturedCard(),
+            itemBuilder: (context, index) {
+              return InkWell(
+                borderRadius: BorderRadius.circular(16),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const RestaurantMenuScreen(),
+                    ),
+                  );
+                },
+                child: const Padding(
+                  padding: EdgeInsets.only(bottom: 12),
+                  child: _FeaturedCard(),
+                ),
+              );
+            },
           ),
         ],
       ),
