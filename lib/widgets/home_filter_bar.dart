@@ -22,12 +22,12 @@ class _HomeFilterBarState extends State<HomeFilterBar> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 44, // Zomato exact-ish height
+      height: 38, // Zomato exact-ish height
       child: Align(
         alignment: Alignment.center,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           itemCount: filters.length,
           itemBuilder: (context, index) {
             final item = filters[index];
@@ -75,7 +75,7 @@ class _FilterChip extends StatelessWidget {
           onTap: onTap,
           borderRadius: BorderRadius.circular(8),
           child: Container(
-            height: 36,
+            height: 32,
             padding: const EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
@@ -93,7 +93,7 @@ class _FilterChip extends StatelessWidget {
                 Text(
                   label,
                   style: const TextStyle(
-                    fontSize: 12.5,
+                    fontSize: 12,
                     fontWeight: FontWeight.w500,
                     color: Colors.black87,
                   ),

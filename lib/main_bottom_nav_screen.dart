@@ -40,8 +40,8 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
         child: Row(
           children: [
             Expanded(child: _item(Icons.delivery_dining, "Delivery", 0)),
-            Expanded(child: _item(Icons.currency_rupee, "Under ₹250", 1)),
-            Expanded(child: _item(Icons.restaurant, "Dining", 2)),
+            Expanded(child: _item(Icons.local_offer        , "Under ₹250", 1)),
+            Expanded(child: _item(Icons.room_service, "Dining", 2)),
             _blinkitButton(),
           ],
         ),
@@ -80,9 +80,11 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
   }
 
   /// 🟡 BLINKIT BUTTON (right side)
-  Widget _blinkitButton() {
-    return Padding(
-      padding: const EdgeInsets.only(right: -2),
+ Widget _blinkitButton() {
+  return ClipRect(
+    child: Align(
+      alignment: Alignment.centerLeft,
+      widthFactor: 0.92, // 👈 adjust: 0.90–0.97
       child: Container(
         height: 44,
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -98,7 +100,7 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
-                color: Colors.black, // 👈 blinkit text black
+                color: Colors.black,
               ),
             ),
             const SizedBox(width: 6),
@@ -107,12 +109,14 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
               child: const Icon(
                 Icons.arrow_forward,
                 size: 18,
-                color: Color(0xFF0C831F), // 👈 arrow green
+                color: Color(0xFF0C831F),
               ),
             ),
           ],
         ),
       ),
-    );
-  }
+    ),
+  );
+}
+
 }
