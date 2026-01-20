@@ -21,12 +21,12 @@ class LocationBottomSheet extends StatelessWidget {
               child: const Icon(Icons.keyboard_arrow_down, size: 32),
             ),
 
-            const SizedBox(height: 8),
+            const SizedBox(width: 8),
 
             /// 📍 Title
             const Text(
               "Select a location",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
 
             const SizedBox(height: 16),
@@ -72,7 +72,7 @@ class LocationBottomSheet extends StatelessWidget {
               child: Text(
                 "NEARBY LOCATIONS",
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: 16,
                   color: Colors.grey,
                   fontWeight: FontWeight.bold,
                 ),
@@ -84,6 +84,34 @@ class LocationBottomSheet extends StatelessWidget {
             /// 🗂 Nearby Cards
             Expanded(
               child: ListView(
+                children: List.generate(10, (index) {
+                  return _nearbyLocationCard(
+                    distance: "7.4 km",
+                    title: "The Corenthum",
+                    subtitle: "Sector 62, Block A, Industrial Area, Noida",
+                  );
+                }),
+              ),
+            ),
+
+            const SizedBox(height: 16),
+
+            /// 📌 Nearby Locations Title
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "EECENT LOCATIONS",
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+
+            SizedBox(height: 16),
+            Expanded(
+              child: ListView(
                 children: [
                   _nearbyLocationCard(
                     distance: "7.4 km",
@@ -93,6 +121,8 @@ class LocationBottomSheet extends StatelessWidget {
                 ],
               ),
             ),
+
+            SizedBox(height: 20),
           ],
         ),
       ),
@@ -106,25 +136,31 @@ class LocationBottomSheet extends StatelessWidget {
     required String title,
     String? subtitle,
   }) {
-    return Row(
-      children: [
-        Icon(icon, color: iconColor),
-        const SizedBox(width: 12),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(title, style: const TextStyle(fontWeight: FontWeight.w600)),
-              if (subtitle != null)
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        children: [
+          Icon(icon, color: iconColor),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
                 Text(
-                  subtitle,
-                  style: const TextStyle(fontSize: 12, color: Colors.grey),
+                  title,
+                  style: const TextStyle(fontWeight: FontWeight.w600),
                 ),
-            ],
+                if (subtitle != null)
+                  Text(
+                    subtitle,
+                    style: const TextStyle(fontSize: 12, color: Colors.grey),
+                  ),
+              ],
+            ),
           ),
-        ),
-        const Icon(Icons.arrow_forward_ios, size: 14),
-      ],
+          const Icon(Icons.arrow_forward_ios, size: 14),
+        ],
+      ),
     );
   }
 
@@ -173,3 +209,9 @@ class LocationBottomSheet extends StatelessWidget {
     );
   }
 }
+
+final locations = List.filled(10, {
+  "distance": "7.4 km",
+  "title": "The Corenthum",
+  "subtitle": "Sector 62, Block A, Industrial Area, Noida",
+});

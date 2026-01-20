@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:zomatoo/widgets/explore_menu_curved_section.dart';
-import 'package:zomatoo/widgets/explore_more_section.dart';
-import 'package:zomatoo/widgets/featured_section.dart';
-import 'package:zomatoo/widgets/home_filter_bar.dart';
 import 'package:zomatoo/widgets/in_mood_for.dart';
-import 'package:zomatoo/widgets/recommended_section.dart';
 
 import 'widgets/dining_explore_cart.dart';
 import 'widgets/dining_featured_arount.dart';
 import 'widgets/dining_must_try.dart';
 import 'widgets/dining_popular_resturent.dart';
-import 'widgets/in_mood_for.dart';
 import 'widgets/limelight.dart';
 import 'widgets/next_fav_bar.dart';
 
@@ -189,7 +184,7 @@ class DiningScreen extends StatelessWidget {
           SliverToBoxAdapter(child: SizedBox(height: 20)),
           const SliverToBoxAdapter(child: DiningExploreCart()),
           SliverToBoxAdapter(child: SizedBox(height: 20)),
-          const SliverToBoxAdapter(child: DiningFeatured.new()),
+          const SliverToBoxAdapter(child: DiningFeatured()),
           SliverToBoxAdapter(child: SizedBox(height: 20)),
           const SliverToBoxAdapter(child: MustTriesSection()),
           SliverToBoxAdapter(child: SizedBox(height: 20)),

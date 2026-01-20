@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
 
 class MustTriesSection extends StatelessWidget {
   const MustTriesSection({super.key});
@@ -118,7 +117,7 @@ class MustTryCard extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        '$tag1',
+                        tag1,
                         style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -134,7 +133,7 @@ class MustTryCard extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ),
                       Text(
-                        '$tag2',
+                        tag2,
                         style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,

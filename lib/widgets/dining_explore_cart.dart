@@ -8,7 +8,7 @@ class DiningExploreCart extends StatefulWidget {
 }
 
 class _DiningExploreCartState extends State<DiningExploreCart> {
-  int _currentIndex = 0;
+  final int _currentIndex = 0;
 
   final List<String> images = [
     'assets/images/resturent1.jpg',
