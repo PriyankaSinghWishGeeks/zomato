@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:zomatoo/login_signup/Zomato_login_page.dart';
 import 'package:zomatoo/main_bottom_nav_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -52,7 +53,7 @@ class _SplashScreenState extends State<SplashScreen>
     Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => const MainBottomNavScreen()),
+        MaterialPageRoute(builder: (_) => const ZomatoLoginPage()),
       );
     });
   }

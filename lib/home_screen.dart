@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zomatoo/location/location_bottom_sheet.dart';
 import 'package:zomatoo/offers_banner_slider.dart';
 import 'package:zomatoo/widgets/explore_menu_section.dart';
 import 'package:zomatoo/widgets/explore_more_section.dart';
@@ -25,33 +26,35 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     const Icon(Icons.location_on, color: Colors.red, size: 22),
                     const SizedBox(width: 6),
-
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Row(
-                            children: [
-                              Text(
-                                "Block R",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
+                    InkWell(
+                      onTap: () => _openLocationBottomSheet(context),
+                      child: Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            Row(
+                              children: [
+                                Text(
+                                  "Block R",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                              Icon(Icons.keyboard_arrow_down, size: 18),
-                            ],
-                          ),
-                          Text(
-                            "Mohan Garden, Razapur Khurd…",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: 12.5,
-                              color: Colors.grey,
+                                Icon(Icons.keyboard_arrow_down, size: 18),
+                              ],
                             ),
-                          ),
-                        ],
+                            Text(
+                              "Mohan Garden, Razapur Khurd…",
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 12.5,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
 
@@ -303,5 +306,16 @@ Widget _iconToggle({
       color: isActive ? activeColor.withOpacity(0.15) : Colors.grey.shade200,
     ),
     child: Icon(icon, size: 16, color: isActive ? activeColor : Colors.grey),
+  );
+}
+void _openLocationBottomSheet(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    backgroundColor: Colors.transparent,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+    ),
+    builder: (_) => const LocationBottomSheet(),
   );
 }
