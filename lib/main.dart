@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       
-      title: 'Zomato Clone',
+      title: 'Zomatoo',
       theme: ThemeData(
         primaryColor: Color.fromARGB(1, 223, 7, 7),
         scaffoldBackgroundColor: Color.fromARGB(1, 243, 242, 242),

@@ -29,7 +29,7 @@ class DiningScreen extends StatelessWidget {
                   maxHeight: 140,
                   child: Container(
                     color: const Color.fromARGB(255, 17, 3, 43), // dark purple
-                    padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
+                    padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -42,7 +42,7 @@ class DiningScreen extends StatelessWidget {
                               color: Colors.white,
                               size: 22,
                             ),
-                            const SizedBox(width: 6),
+                            const SizedBox(width: 10),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,

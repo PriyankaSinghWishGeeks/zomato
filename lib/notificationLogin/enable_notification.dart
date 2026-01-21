@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:zomatoo/home_screen.dart';
 import 'package:zomatoo/main_bottom_nav_screen.dart';
 
 class EnableNotificationPage extends StatelessWidget {
