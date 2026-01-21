@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'restaurant_menu_screen.dart';
+
 class Under250Section extends StatelessWidget {
   const Under250Section({super.key});
 
@@ -99,6 +101,7 @@ class _RestaurantCard extends StatelessWidget {
           const SizedBox(height: 10),
 
           // 🔹 ROW 3 — VIEW FULL MENU
+          // 🔹 ROW 3 — VIEW FULL MENU
           Center(
             child: Container(
               decoration: BoxDecoration(
@@ -115,15 +118,19 @@ class _RestaurantCard extends StatelessWidget {
               ),
               child: InkWell(
                 borderRadius: BorderRadius.circular(20),
-                onTap: () {},
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 8,
-                  ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const RestaurantMenuScreen(),
+                    ),
+                  );
+                },
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
-                    children: const [
+                    children: [
                       Text(
                         "View full menu",
                         style: TextStyle(

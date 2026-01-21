@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../explore/explore_only_page.dart';
+
 class ExploreMenuSection extends StatefulWidget {
   const ExploreMenuSection({super.key});
 
@@ -30,14 +32,32 @@ class _ExploreMenuSectionState extends State<ExploreMenuSection> {
           if (index == 0) {
             return _ExploreItem(
               isSelected: selectedIndex == 0,
-              onTap: () => setState(() => selectedIndex = 0),
+              onTap: () {
+                setState(() => selectedIndex = 0);
+
+                Future.microtask(() {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => ExploreOnlyPage()),
+                  );
+                });
+              },
             );
           }
 
           if (index == items.length + 1) {
             return _SeeAllItem(
               isSelected: selectedIndex == index,
-              onTap: () => setState(() => selectedIndex = index),
+              onTap: () {
+                setState(() => selectedIndex = index);
+
+                Future.microtask(() {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => ExploreOnlyPage()),
+                  );
+                });
+              },
             );
           }
 
@@ -45,21 +65,28 @@ class _ExploreMenuSectionState extends State<ExploreMenuSection> {
           return _MenuItem(
             item: item,
             isSelected: selectedIndex == index,
-            onTap: () => setState(() => selectedIndex = index),
+            onTap: () {
+              setState(() => selectedIndex = index);
+
+              Future.microtask(() {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => ExploreOnlyPage()),
+                );
+              });
+            },
           );
         },
       ),
     );
   }
 }
+
 class _ExploreItem extends StatelessWidget {
   final bool isSelected;
   final VoidCallback onTap;
 
-  const _ExploreItem({
-    required this.isSelected,
-    required this.onTap,
-  });
+  const _ExploreItem({required this.isSelected, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -69,14 +96,12 @@ class _ExploreItem extends StatelessWidget {
       label: "Explore",
       child: ClipRRect(
         borderRadius: BorderRadius.circular(14),
-        child: Image.asset(
-          "assets/gif/explore.gif",
-          fit: BoxFit.cover,
-        ),
+        child: Image.asset("assets/gif/explore.gif", fit: BoxFit.cover),
       ),
     );
   }
 }
+
 class _MenuItem extends StatelessWidget {
   final _MenuItemData item;
   final bool isSelected;
@@ -98,14 +123,12 @@ class _MenuItem extends StatelessWidget {
     );
   }
 }
+
 class _SeeAllItem extends StatelessWidget {
   final bool isSelected;
   final VoidCallback onTap;
 
-  const _SeeAllItem({
-    required this.isSelected,
-    required this.onTap,
-  });
+  const _SeeAllItem({required this.isSelected, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -142,7 +165,9 @@ class _BaseMenuWrapper extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(
-              color: isSelected ? const Color.fromARGB(255, 230, 63, 12) : Colors.transparent,
+              color: isSelected
+                  ? const Color.fromARGB(255, 230, 63, 12)
+                  : Colors.transparent,
               width: 3,
             ),
           ),
@@ -178,6 +203,7 @@ class _BaseMenuWrapper extends StatelessWidget {
     );
   }
 }
+
 class _MenuItemData {
   final String title;
   final String image;

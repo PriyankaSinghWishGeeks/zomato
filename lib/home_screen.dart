@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:zomatoo/gold%20pages/gold_page.dart';
 import 'package:zomatoo/location/location_bottom_sheet.dart';
 import 'package:zomatoo/offers_banner_slider.dart';
+import 'package:zomatoo/payment_history/money_history_page.dart';
+import 'package:zomatoo/profile/user_profile.dart';
+import 'package:zomatoo/search_items/search_items.dart';
 import 'package:zomatoo/widgets/explore_menu_section.dart';
 import 'package:zomatoo/widgets/explore_more_section.dart';
 import 'package:zomatoo/widgets/featured_section.dart';
@@ -37,7 +41,7 @@ class HomeScreen extends StatelessWidget {
                                 Text(
                                   "Block R",
                                   style: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 15,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -45,11 +49,11 @@ class HomeScreen extends StatelessWidget {
                               ],
                             ),
                             Text(
-                              "Mohan Garden, Razapur Khurd…",
+                              "Mohan Garden, Razapur khud...",
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                fontSize: 12.5,
+                                fontSize: 12,
                                 color: Colors.grey,
                               ),
                             ),
@@ -58,62 +62,93 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
 
-                    const SizedBox(width: 8),
+                    const SizedBox(width: 7),
 
                     // GOLD
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 6,
-                      ),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFFFF3D6),
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: const Color(0xFFFFD28C)),
-                      ),
-                      child: const Row(
-                        children: [
-                          Text(
-                            "GOLD",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12,
-                              color: Color(0xFFB78628),
-                            ),
+                    InkWell(
+                      borderRadius: BorderRadius.circular(20),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const ZomatoGoldPage(),
                           ),
-                          SizedBox(width: 3),
-                          Text(
-                            "₹1",
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Color(0xFFB78628),
+                        );
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 6,
+                        ),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFFFF3D6),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color: const Color(0xFFFFD28C)),
+                        ),
+                        child: const Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              "GOLD",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12,
+                                color: Color(0xFFB78628),
+                              ),
                             ),
-                          ),
-                        ],
+                            SizedBox(width: 3),
+                            Text(
+                              "₹1",
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Color(0xFFB78628),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
 
                     const SizedBox(width: 10),
-                    // 💳 Payment icon
-                    CircleAvatar(
-                      radius: 18,
-                      backgroundColor: Colors.grey.shade200,
-                      child: const Icon(
-                        Icons.account_balance_wallet_outlined,
-                        size: 18,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const ZomatoMoneyPage(),
+                          ),
+                        );
+                      },
+                      child: CircleAvatar(
+                        radius: 18,
+                        backgroundColor: Colors.grey.shade200,
+                        child: const Icon(
+                          Icons.account_balance_wallet_outlined,
+                          size: 18,
+                        ),
                       ),
                     ),
+
                     const SizedBox(width: 8),
 
-                    // 👤 Profile icon
-                    const CircleAvatar(
-                      radius: 18,
-                      backgroundColor: Colors.blue,
-                      child: Text(
-                        "P",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const ProfilePage(),
+                          ),
+                        );
+                      },
+                      child: const CircleAvatar(
+                        radius: 18,
+                        backgroundColor: Colors.blue,
+                        child: Text(
+                          "P",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
@@ -134,44 +169,54 @@ class HomeScreen extends StatelessWidget {
                   horizontal: 16,
                   vertical: 10,
                 ),
-                child: Container(
-                  height: 52,
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(14),
-                    border: Border.all(color: Colors.grey.shade300),
-                    color: Colors.white,
-                  ),
-                  child: Row(
-                    children: [
-                      const Icon(Icons.search, color: Colors.red),
-                      const SizedBox(width: 8),
-                      const Expanded(
-                        child: Text(
-                          'Search "noodles"',
-                          style: TextStyle(color: Colors.grey),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const SearchItemsPage(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    height: 52,
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(color: Colors.grey.shade300),
+                      color: Colors.white,
+                    ),
+                    child: Row(
+                      children: [
+                        const Icon(Icons.search, color: Colors.red),
+                        const SizedBox(width: 8),
+                        const Expanded(
+                          child: Text(
+                            'Search "noodles"',
+                            style: TextStyle(color: Colors.grey),
+                          ),
                         ),
-                      ),
-                      Container(
-                        height: 24,
-                        width: 1,
-                        color: Colors.grey.shade300,
-                      ),
-                      const SizedBox(width: 10),
-                      const Icon(Icons.mic, color: Colors.red),
-                      const SizedBox(width: 10),
-                      _iconToggle(
-                        icon: Icons.eco,
-                        activeColor: Colors.green,
-                        isActive: true,
-                      ),
-                      const SizedBox(width: 8),
-                      _iconToggle(
-                        icon: Icons.favorite,
-                        activeColor: Colors.green,
-                        isActive: false,
-                      ),
-                    ],
+                        Container(
+                          height: 24,
+                          width: 1,
+                          color: Colors.grey.shade300,
+                        ),
+                        const SizedBox(width: 10),
+                        const Icon(Icons.mic, color: Colors.red),
+                        const SizedBox(width: 10),
+                        _iconToggle(
+                          icon: Icons.eco,
+                          activeColor: Colors.green,
+                          isActive: true,
+                        ),
+                        const SizedBox(width: 8),
+                        _iconToggle(
+                          icon: Icons.favorite,
+                          activeColor: Colors.green,
+                          isActive: false,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -308,6 +353,7 @@ Widget _iconToggle({
     child: Icon(icon, size: 16, color: isActive ? activeColor : Colors.grey),
   );
 }
+
 void _openLocationBottomSheet(BuildContext context) {
   showModalBottomSheet(
     context: context,

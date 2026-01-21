@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zomatoo/home_screen.dart';
+import 'package:zomatoo/main_bottom_nav_screen.dart';
 
 class EnableNotificationPage extends StatelessWidget {
   const EnableNotificationPage({super.key});
@@ -54,7 +55,7 @@ class EnableNotificationPage extends StatelessWidget {
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const HomeScreen(),
+                        builder: (context) => const MainBottomNavScreen(),
                       ),
                       (route) => false, // clears onboarding stack
                     );
@@ -86,7 +87,7 @@ class EnableNotificationPage extends StatelessWidget {
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const HomeScreen(),
+                        builder: (context) => const MainBottomNavScreen(),
                       ),
                       (route) => false,
                     );
